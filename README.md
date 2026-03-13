@@ -1,0 +1,1 @@
+# nextjs-strapi-social-app
