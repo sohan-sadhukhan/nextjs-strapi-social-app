@@ -9,15 +9,18 @@ const ThemeToggleButton = () => {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="flex cursor-pointer items-center">
+      className="flex cursor-pointer items-center"
+      aria-label="Toggle theme">
       <Sun
         size={28}
         className="-rotate-90 opacity-100 transition-all duration-300 dark:rotate-0 dark:opacity-0"
+        aria-hidden="true"
       />
 
       <MoonStar
         size={28}
         className="absolute -rotate-90 opacity-0 transition-all duration-300 dark:rotate-0 dark:opacity-100"
+        aria-hidden="true"
       />
     </button>
   );
