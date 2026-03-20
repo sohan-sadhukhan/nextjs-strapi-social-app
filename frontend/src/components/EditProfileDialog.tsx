@@ -1,0 +1,110 @@
+import { PencilIcon } from "lucide-react";
+import BioForm from "./Forms/BioForm ";
+import CoverImageForm from "./Forms/CoverImageForm";
+import NameForm from "./Forms/NameForm";
+import ProfileImageForm from "./Forms/ProfileImageForm";
+import { Button } from "./shadcnui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./shadcnui/dialog";
+import { Separator } from "./shadcnui/separator";
+import UsernameField from "./UsernameField ";
+
+type EditProfileDialogProps = {
+  userProfileInfo: {
+    name: string;
+    username: string;
+    bio: string;
+    joinedDate: string;
+    posts: number;
+    followers: number;
+    following: number;
+    avatarUrl: string;
+    coverUrl: string;
+  };
+};
+
+const EditProfileDialog = ({ userProfileInfo }: EditProfileDialogProps) => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button
+          className={
+            "flex cursor-pointer gap-2 rounded-full bg-sky-500 px-6 py-1 font-semibold text-white shadow-md hover:bg-sky-600"
+          }
+          aria-label="Edit profile">
+          Edit
+          <PencilIcon
+            size={14}
+            aria-hidden="true"
+          />
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent className="sm:max-w-xl">
+        <DialogHeader>
+          <DialogTitle className="text-center text-lg font-semibold text-zinc-900 md:text-2xl dark:text-zinc-100">
+            Edit Profile
+          </DialogTitle>
+        </DialogHeader>
+
+        <Separator className="bg-primary" />
+
+        <section
+          className="no-scrollbar max-h-[78vh] divide-zinc-100 overflow-y-auto dark:divide-zinc-800"
+          aria-label="Edit profile form sections">
+          {/* ── Form 1: Profile Picture ── */}
+          <section className="space-y-1 py-5">
+            <h2 className="text-sm font-semibold md:text-lg">
+              Profile Picture
+            </h2>
+            <ProfileImageForm
+              currentAvatar={userProfileInfo.avatarUrl}
+              name={userProfileInfo.name}
+            />
+          </section>
+
+          {/* ── Form 2: Cover Picture ── */}
+          <section className="space-y-1 py-5">
+            <h2 className="text-sm font-semibold md:text-lg">Cover Picture</h2>
+            <CoverImageForm currentCover={userProfileInfo.coverUrl} />
+          </section>
+
+          {/* ── Form 3: Bio + Name + Username ── */}
+          <section className="space-y-5 py-5">
+            <h2 className="text-sm font-semibold md:text-lg">Profile Info</h2>
+
+            <BioForm currentBio={userProfileInfo.bio} />
+
+            <Separator className="bg-zinc-100 dark:bg-zinc-800" />
+
+            <NameForm currentName={userProfileInfo.name} />
+
+            <Separator className="bg-zinc-100 dark:bg-zinc-800" />
+
+            <UsernameField username={userProfileInfo.username} />
+          </section>
+        </section>
+
+        <DialogFooter className="sm:justify-center">
+          <DialogClose asChild>
+            <Button
+              size={"lg"}
+              type="button"
+              className="cursor-pointer">
+              Close
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export default EditProfileDialog;
