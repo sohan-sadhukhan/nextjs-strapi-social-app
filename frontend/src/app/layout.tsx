@@ -19,7 +19,7 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => {
           enableSystem={false}>
           <Header />
 
-          <main className="mx-auto max-w-7xl px-4 py-3 pt-18">{children}</main>
+          <main className="mx-auto max-w-7xl">{children}</main>
         </ThemeProvider>
       </body>
     </html>

@@ -19,3 +19,11 @@ export const profileNameSchema = z.object({
       "Name can only contain letters, spaces, hyphens, and apostrophes",
     ),
 });
+
+export const postDescriptionSchema = z.object({
+  description: z
+    .string()
+    .min(1, "Description can't be empty")
+    .max(500, "Description is too long")
+    .optional(),
+});

@@ -12,6 +12,7 @@ const UsernameField = ({ username }: UsernameFieldProps) => {
     <Field>
       <div className="flex items-center justify-between">
         <FieldLabel htmlFor="username">Username</FieldLabel>
+        {/* Link to settings */}
         <Link
           href="/"
           className="text-xs text-blue-600 transition-colors hover:text-blue-700 hover:underline"
@@ -21,6 +22,7 @@ const UsernameField = ({ username }: UsernameFieldProps) => {
       </div>
 
       <div className="relative">
+        {/* Read-only input */}
         <Input
           id="username"
           value={`@${username}`}

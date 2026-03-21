@@ -2,10 +2,10 @@
 
 import { X } from "lucide-react";
 import { useState } from "react";
-import { Button } from "./shadcnui/button";
-import { Card } from "./shadcnui/card";
+import { Button } from "../shadcnui/button";
+import { Card } from "../shadcnui/card";
 
-type User = {
+type SuggestedUserType = {
   id: number;
   name: string;
   handle: string;
@@ -15,65 +15,20 @@ type User = {
   text: string;
 };
 
-const initialUsers: User[] = [
-  {
-    id: 1,
-    name: "Melissa Kuhn",
-    handle: "@Melissa1234",
-    mutual: "3 mutual connections",
-    initials: "MK",
-    bg: "bg-blue-100",
-    text: "text-blue-700",
-  },
-  {
-    id: 2,
-    name: "Priya Sharma",
-    handle: "@priyasharma",
-    mutual: "5 mutual connections",
-    initials: "PS",
-    bg: "bg-pink-100",
-    text: "text-pink-700",
-  },
-  {
-    id: 3,
-    name: "James Okoro",
-    handle: "@jokoro22",
-    mutual: "1 mutual connection",
-    initials: "JO",
-    bg: "bg-emerald-100",
-    text: "text-emerald-700",
-  },
-  {
-    id: 4,
-    name: "Lena Fischer",
-    handle: "@lenaf",
-    mutual: "2 mutual connections",
-    initials: "LF",
-    bg: "bg-amber-100",
-    text: "text-amber-700",
-  },
-  {
-    id: 5,
-    name: "Arjun Mehta",
-    handle: "@arjunmehta",
-    mutual: "7 mutual connections",
-    initials: "AM",
-    bg: "bg-violet-100",
-    text: "text-violet-700",
-  },
-];
+type Props = {
+  usersData: SuggestedUserType[];
+};
 
-export default function ProfileRightPanel() {
-  const [users, setUsers] = useState(initialUsers);
-  const [shownCount, setShownCount] = useState(3);
+const SuggestedUsers = ({ usersData }: Props) => {
+  const [users, setUsers] = useState(usersData);
+  const [shownCount, setShownCount] = useState(4);
 
   const dismiss = (id: any) =>
     setUsers((prev) => prev.filter((u) => u.id !== id));
 
   const visibleUsers = users.slice(0, shownCount);
-
   return (
-    <aside className="hidden flex-col gap-4 font-sans xl:flex">
+    <aside className="flex w-full flex-col gap-4 font-sans">
       <div className="flex flex-col gap-4">
         {visibleUsers.map((user) => (
           <Card
@@ -127,4 +82,6 @@ export default function ProfileRightPanel() {
       )}
     </aside>
   );
-}
+};
+
+export default SuggestedUsers;
