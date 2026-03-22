@@ -94,14 +94,13 @@ const PostCard = ({
         <div className="flex items-center gap-1">
           {!isOwnPost && (
             <Button
-              variant={following ? "outline" : "default"}
               size="sm"
               onClick={() => setFollowing((prev) => !prev)}
               aria-label={
                 following ? `Unfollow ${authorName}` : `Follow ${authorName}`
               }
               aria-pressed={following}
-              className="h-8 cursor-pointer rounded-full bg-blue-600 px-4 text-xs font-semibold text-white hover:bg-blue-700">
+              className={`h-8 cursor-pointer rounded-full px-4 text-xs font-semibold text-white ${following ? "text-primary border-primary hover:bg-primary/5 border bg-transparent" : "bg-blue-600 hover:bg-blue-700"}`}>
               {following ? "Following" : "Follow"}
             </Button>
           )}
@@ -199,7 +198,7 @@ const PostCard = ({
             reacted ?
               "text-blue-600 hover:text-blue-700"
             : "text-muted-foreground hover:text-foreground"
-          }cursor-pointer`}>
+          } cursor-pointer`}>
           <ThumbsUpIcon
             className="size-5 sm:size-4"
             aria-hidden="true"

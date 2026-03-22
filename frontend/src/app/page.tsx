@@ -1,5 +1,5 @@
-import CreatePostCard from "@/components/Cards/CreatePostCard ";
-import PostCard from "@/components/Cards/PostCard ";
+import CreatePostCard from "@/components/Cards/CreatePostCard";
+import PostCard from "@/components/Cards/PostCard";
 import ProfileOverview from "@/components/Cards/ProfileOverview";
 import SuggestedUsers from "@/components/Cards/SuggestedUsers";
 import { PostType, SuggestedUserType, UserInfoType } from "@/lib/type";
@@ -131,7 +131,6 @@ const page = () => {
             bio={bio}
             followersCount={followers}
             followingCount={following}
-            profileUrl="/profile"
           />
         </aside>
 

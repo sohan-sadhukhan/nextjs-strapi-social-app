@@ -1,4 +1,4 @@
-import CreatePostCard from "@/components/Cards/CreatePostCard ";
+import CreatePostCard from "@/components/Cards/CreatePostCard";
 import SuggestedUsers from "@/components/Cards/SuggestedUsers";
 import UserProfileCard from "@/components/Cards/UserProfileCard";
 import { SuggestedUserType, UserInfoType } from "@/lib/type";
