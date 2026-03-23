@@ -41,10 +41,22 @@ const page = () => {
       authorAvatar: "avatar.jpg",
       timeAgo: "Joined 1 day ago",
       description: "Hate me or love me, either way, I'm still on your mind 🤩",
-      postImage: "/avatar.jpg",
+      postImage: "avatar.jpg",
       reactionCount: 51,
       isFollowing: false,
       isOwnPost: false,
+      comments: {
+        id: 1,
+        name: "sohan",
+        avatarUrl: "avatar.png",
+        comment: [
+          "Nice pic try The lighting in this photo really highlights the scenery",
+          "Confidence looks amazing on you.",
+          "You absolutely understood the assignment.",
+        ],
+        timeAgo: "1 day",
+        userName: "sohan1234",
+      },
     },
     {
       authorName: "Sohan Sadhukhan",
@@ -52,10 +64,21 @@ const page = () => {
       authorAvatar: "avatar.jpg",
       timeAgo: "Joined 1 day ago",
       description: "Hate me or love me, either way, I'm still on your mind 🤩",
-      postImage: "/avatar.jpg",
+      postImage: "avatar.jpg",
       reactionCount: 11,
       isFollowing: true,
       isOwnPost: true,
+      comments: {
+        id: 1,
+        name: "sohan",
+        avatarUrl: "avatar.png",
+        comment: [
+          "Nice pic try The lighting in this photo really highlights the scenery",
+          "That smile could fix a bad day.",
+        ],
+        timeAgo: "1 day",
+        userName: "sohan1234",
+      },
     },
     {
       authorName: "Sohan Sadhukhan",
@@ -63,10 +86,21 @@ const page = () => {
       authorAvatar: "avatar.jpg",
       timeAgo: "Joined 1 day ago",
       description: "Hate me or love me, either way, I'm still on your mind 🤩",
-      postImage: "/avatar.jpg",
+      postImage: "avatar.jpg",
       reactionCount: 21,
       isFollowing: true,
-      isOwnPost: false,
+      isOwnPost: true,
+      comments: {
+        id: 1,
+        name: "sohan",
+        avatarUrl: "avatar.png",
+        comment: [
+          "Nice pic try The lighting in this photo really highlights the scenery",
+          "Beauty that doesn't need a filter.",
+        ],
+        timeAgo: "1 day",
+        userName: "sohan1234",
+      },
     },
   ];
 
@@ -154,6 +188,7 @@ const page = () => {
                 reactionCount={post.reactionCount}
                 isFollowing={post.isFollowing}
                 isOwnPost={post.isOwnPost}
+                comments={post.comments}
               />
             ))}
           </div>

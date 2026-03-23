@@ -15,13 +15,13 @@ import {
   EllipsisVerticalIcon,
   FlagIcon,
   LinkIcon,
-  MessageCircleIcon,
   Share2Icon,
   ThumbsUpIcon,
   Trash2Icon,
 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import CommentSection from "../CommentSection";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,6 +39,7 @@ const PostCard = ({
   reactionCount,
   isFollowing,
   isOwnPost,
+  comments,
 }: PostType) => {
   const [following, setFollowing] = useState(isFollowing);
   const [reacted, setReacted] = useState(false);
@@ -66,7 +67,7 @@ const PostCard = ({
           {/* Avatar */}
           <Avatar className="ring-primary h-10 w-10 ring-2">
             <AvatarImage
-              src={authorAvatar}
+              src={`/${authorAvatar}`}
               alt={authorName}
               className="object-cover"
             />
@@ -152,7 +153,7 @@ const PostCard = ({
       {postImage && (
         <figure className="w-full">
           <Image
-            src={postImage}
+            src={`/${authorAvatar}`}
             alt={`Photo shared by ${authorName}`}
             width={800}
             height={500}
@@ -178,7 +179,7 @@ const PostCard = ({
         </div>
       )}
 
-      <Separator className="mx-4 mt-3 w-auto" />
+      <Separator className="mt-3 w-auto" />
 
       {/* Action bar */}
       <footer
@@ -207,16 +208,18 @@ const PostCard = ({
         </Button>
 
         {/* Comment */}
-        <Button
-          variant="ghost"
-          aria-label="Comment on post"
-          className="text-muted-foreground hover:text-foreground gap-2 rounded-xl font-medium">
-          <MessageCircleIcon
-            className="size-5 sm:size-4"
-            aria-hidden="true"
-          />
-          <span className="hidden sm:inline">Comment</span>
-        </Button>
+        <CommentSection
+          authorName={authorName}
+          authorUsername={authorUsername}
+          authorAvatar={authorAvatar}
+          timeAgo={timeAgo}
+          description={description}
+          postImage={timeAgo}
+          reactionCount={reactionCount}
+          isFollowing={isFollowing}
+          isOwnPost={isOwnPost}
+          comments={comments}
+        />
 
         {/* Share */}
         <Button
