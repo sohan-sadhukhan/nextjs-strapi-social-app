@@ -14,23 +14,23 @@ import {
   DialogTrigger,
 } from "./shadcnui/dialog";
 import { Separator } from "./shadcnui/separator";
-import UsernameField from "./UsernameField ";
+import UsernameField from "./UsernameField";
 
 type EditProfileDialogProps = {
-  userProfileInfo: {
-    name: string;
-    username: string;
-    bio: string;
-    joinedDate: string;
-    posts: number;
-    followers: number;
-    following: number;
-    avatarUrl: string;
-    coverUrl: string;
-  };
+  name: string;
+  username: string;
+  bio: string;
+  avatarUrl: string;
+  coverUrl: string;
 };
 
-const EditProfileDialog = ({ userProfileInfo }: EditProfileDialogProps) => {
+const EditProfileDialog = ({
+  avatarUrl,
+  bio,
+  coverUrl,
+  name,
+  username,
+}: EditProfileDialogProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -57,38 +57,38 @@ const EditProfileDialog = ({ userProfileInfo }: EditProfileDialogProps) => {
         <Separator className="bg-primary" />
 
         <section
-          className="no-scrollbar max-h-[78vh] divide-zinc-100 overflow-y-auto dark:divide-zinc-800"
+          className="no-scrollbar max-h-[70vh] divide-zinc-100 overflow-y-auto dark:divide-zinc-800"
           aria-label="Edit profile form sections">
-          {/* ── Form 1: Profile Picture ── */}
+          {/* Form 1: Profile Picture */}
           <section className="space-y-1 py-5">
             <h2 className="text-sm font-semibold md:text-lg">
               Profile Picture
             </h2>
             <ProfileImageForm
-              currentAvatar={userProfileInfo.avatarUrl}
-              name={userProfileInfo.name}
+              currentAvatar={avatarUrl}
+              name={name}
             />
           </section>
 
-          {/* ── Form 2: Cover Picture ── */}
+          {/* Form 2: Cover Picture */}
           <section className="space-y-1 py-5">
             <h2 className="text-sm font-semibold md:text-lg">Cover Picture</h2>
-            <CoverImageForm currentCover={userProfileInfo.coverUrl} />
+            <CoverImageForm currentCover={coverUrl} />
           </section>
 
-          {/* ── Form 3: Bio + Name + Username ── */}
+          {/* Form 3: Bio + Name + Username */}
           <section className="space-y-5 py-5">
             <h2 className="text-sm font-semibold md:text-lg">Profile Info</h2>
 
-            <BioForm currentBio={userProfileInfo.bio} />
+            <BioForm currentBio={bio} />
 
             <Separator className="bg-zinc-100 dark:bg-zinc-800" />
 
-            <NameForm currentName={userProfileInfo.name} />
+            <NameForm currentName={name} />
 
             <Separator className="bg-zinc-100 dark:bg-zinc-800" />
 
-            <UsernameField username={userProfileInfo.username} />
+            <UsernameField username={username} />
           </section>
         </section>
 

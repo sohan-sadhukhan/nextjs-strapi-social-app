@@ -81,7 +81,6 @@ const CoverImageForm = ({ currentCover }: CoverImageFormProps) => {
           <Button
             disabled={isUploading}
             onClick={() => coverImageHandler()}
-            type="submit"
             className="cursor-pointer rounded-xl bg-blue-600 px-6 py-2 font-medium text-white shadow-sm hover:bg-blue-700">
             Update
           </Button>
