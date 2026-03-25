@@ -1,7 +1,7 @@
 import { MessageCircleIcon } from "lucide-react";
 import CommentCard from "./Cards/CommentCard";
 import CreateCommentCard from "./Cards/CreateCommentCard";
-import PostCard from "./Cards/PostCard";
+import ReadOnlyPostCard from "./Cards/ReadOnlyPostCard";
 import { Button } from "./shadcnui/button";
 import {
   Dialog,
@@ -28,8 +28,9 @@ type CommentSectionProp = {
     userName: string;
     avatarUrl: string;
     timeAgo: string;
-    comment: string[];
-  };
+    comment: string;
+    isOwn: boolean;
+  }[];
 };
 
 const CommentSection = ({
@@ -37,8 +38,8 @@ const CommentSection = ({
   authorUsername,
   authorAvatar,
   description,
-  postImage,
   isFollowing,
+  postImage,
   isOwnPost,
   reactionCount,
   timeAgo,
@@ -66,7 +67,7 @@ const CommentSection = ({
         <ScrollArea className="h-[90dvh]">
           <div className="flex items-center gap-2">
             <div className="flex flex-col gap-4 py-1 sm:px-1">
-              <PostCard
+              <ReadOnlyPostCard
                 authorName={authorName}
                 authorUsername={authorUsername}
                 authorAvatar={authorAvatar}
@@ -84,15 +85,15 @@ const CommentSection = ({
                 authorName={authorName}
               />
 
-              {comments.comment.map((comment, ind) => (
+              {comments.map((comment, ind) => (
                 <CommentCard
                   key={ind}
-                  avatarUrl={authorAvatar}
-                  name={authorName}
-                  username={authorUsername}
-                  timeAgo={timeAgo}
-                  comment={comment}
-                  isOwn={isOwnPost}
+                  avatarUrl={comment.avatarUrl}
+                  name={comment.name}
+                  username={comment.userName}
+                  timeAgo={comment.timeAgo}
+                  comment={comment.comment}
+                  isOwn={comment.isOwn}
                 />
               ))}
             </div>

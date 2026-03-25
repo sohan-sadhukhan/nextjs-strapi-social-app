@@ -15,9 +15,10 @@ const Header = () => {
           </h1>
         </Link>
 
-        <nav className="flex items-center gap-6">
-          <Link href={"/"}>Home</Link>
+        <nav className="flex items-center gap-6 text-xs">
+          <Link href={"/notifications"}>Notifications</Link>
           <Link href={"/profile"}>Profile</Link>
+          <Link href={"/settings"}>Settings</Link>
 
           <ThemeToggleButton />
         </nav>
