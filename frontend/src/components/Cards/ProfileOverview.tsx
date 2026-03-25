@@ -16,7 +16,6 @@ type ProfileOverviewProps = {
   bio?: string;
   followersCount: number;
   followingCount: number;
-  profileUrl?: string;
 };
 
 const ProfileOverview = ({
@@ -27,7 +26,6 @@ const ProfileOverview = ({
   bio,
   followersCount,
   followingCount,
-  profileUrl,
 }: ProfileOverviewProps) => {
   const initials = name
     .split(" ")
@@ -64,9 +62,7 @@ const ProfileOverview = ({
         {/* Name & username */}
         <h2 className="text-base leading-tight font-semibold">{name}</h2>
         <p className="text-muted-foreground mt-0.5 text-sm">@{username}</p>
-
         <Separator className="my-3" />
-
         {/* Followers / Following */}
         <div className="flex items-center justify-center gap-8">
           <div className="flex flex-col items-center">
@@ -79,18 +75,18 @@ const ProfileOverview = ({
             <span className="text-muted-foreground text-xs">Following</span>
           </div>
         </div>
-
         {/* Bio */}
         {bio && (
           <p className="text-muted-foreground mt-3 text-center text-sm leading-snug">
             {bio}
           </p>
         )}
-
-        {/* Profile button */}
-        <Button className="mt-4 w-full cursor-pointer rounded-full bg-blue-600 font-semibold text-white hover:bg-blue-700">
-          <Link href={profileUrl}>Profile</Link>
-        </Button>
+        {/* Profile button */}{" "}
+        <Link href={"/profile"}>
+          <Button className="mt-4 w-full cursor-pointer rounded-full bg-blue-600 font-semibold text-white hover:bg-blue-700">
+            Profile
+          </Button>
+        </Link>
       </CardContent>
     </Card>
   );

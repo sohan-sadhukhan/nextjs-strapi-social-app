@@ -20,6 +20,14 @@ export type PostType = {
   reactionCount: number;
   isFollowing: boolean;
   isOwnPost: boolean;
+  comments: {
+    id: number;
+    name: string;
+    userName: string;
+    avatarUrl: string;
+    timeAgo: string;
+    comment: string[];
+  };
 };
 
 export type SuggestedUserType = {

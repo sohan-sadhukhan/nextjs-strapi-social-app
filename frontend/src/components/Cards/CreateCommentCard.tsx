@@ -1,53 +1,31 @@
 "use client";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/shadcnui/avatar";
-import { Button } from "@/components/shadcnui/button";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/shadcnui/popover";
-import { Textarea } from "@/components/shadcnui/textarea";
-import { postDescriptionSchema } from "@/lib/zodSchema";
+import { commentSchema } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import EmojiPicker, { EmojiClickData, Theme } from "emoji-picker-react";
-import {
-  ImageIcon,
-  Loader2Icon,
-  SendHorizonalIcon,
-  SmileIcon,
-} from "lucide-react";
+import { Loader2Icon, SendHorizonalIcon, SmileIcon } from "lucide-react";
 import { useTheme } from "next-themes";
-import Image from "next/image";
 import { useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useFilePicker } from "use-file-picker";
-import { FileSizeValidator } from "use-file-picker/validators";
 import z from "zod";
+import { Avatar, AvatarFallback, AvatarImage } from "../shadcnui/avatar";
+import { Button } from "../shadcnui/button";
 import { Card, CardContent, CardFooter } from "../shadcnui/card";
 import { Field, FieldError } from "../shadcnui/field";
+import { Popover, PopoverContent, PopoverTrigger } from "../shadcnui/popover";
+import { Textarea } from "../shadcnui/textarea";
 
-type CreatePostCardProps = {
+type CreateCommentCardProp = {
   currentAvatar: string;
   authorName: string;
 };
-
-const CreatePostCard = ({ currentAvatar, authorName }: CreatePostCardProps) => {
+const CreateCommentCard = ({
+  authorName,
+  currentAvatar,
+}: CreateCommentCardProp) => {
   const { theme } = useTheme();
   const [isEmojiOpen, setIsEmojiOpen] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  const { openFilePicker, filesContent, plainFiles, errors, clear } =
-    useFilePicker({
-      readAs: "DataURL",
-      accept: "image/*",
-      multiple: false,
-      validators: [new FileSizeValidator({ maxFileSize: 5 * 1024 * 1024 })],
-    });
 
   const {
     handleSubmit,
@@ -56,10 +34,10 @@ const CreatePostCard = ({ currentAvatar, authorName }: CreatePostCardProps) => {
     formState: { isSubmitting, isDirty },
     getValues,
     setValue,
-  } = useForm<z.infer<typeof postDescriptionSchema>>({
-    resolver: zodResolver(postDescriptionSchema),
+  } = useForm<z.infer<typeof commentSchema>>({
+    resolver: zodResolver(commentSchema),
     defaultValues: {
-      description: "",
+      comment: "",
     },
     mode: "all",
   });
@@ -70,13 +48,13 @@ const CreatePostCard = ({ currentAvatar, authorName }: CreatePostCardProps) => {
 
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
-    const current = getValues("description") ?? "";
+    const current = getValues("comment") ?? "";
 
     // insert emoji at cursor or replace selected text
     const newValue =
       current.slice(0, start) + emojiData.emoji + current.slice(end);
 
-    setValue("description", newValue, { shouldDirty: true });
+    setValue("comment", newValue, { shouldDirty: true });
     setIsEmojiOpen(false);
 
     requestAnimationFrame(() => {
@@ -87,13 +65,10 @@ const CreatePostCard = ({ currentAvatar, authorName }: CreatePostCardProps) => {
     });
   };
 
-  const postHandler = async ({
-    description,
-  }: z.infer<typeof postDescriptionSchema>) => {
-    console.log({ description, image: filesContent[0]?.content });
+  const postHandler = async ({ comment }: z.infer<typeof commentSchema>) => {
+    console.log(comment);
 
     reset();
-    clear();
   };
 
   const nameArray = authorName.split(" ");
@@ -104,22 +79,22 @@ const CreatePostCard = ({ currentAvatar, authorName }: CreatePostCardProps) => {
   return (
     <Card
       aria-label="Create a new post"
-      className="w-full rounded-none sm:min-w-xs sm:rounded-2xl sm:shadow-2xl">
+      className="w-full rounded-none sm:min-w-xs sm:rounded-2xl sm:shadow-sm">
       <form
         onSubmit={handleSubmit(postHandler)}
         noValidate
         aria-label="Create post">
         <CardContent>
           <Controller
-            name="description"
+            name="comment"
             control={control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
-                {/* Top row — avatar + textarea */}
+                {/* Top row avatar + textarea */}
                 <div className="flex items-start gap-3">
                   <Avatar className="ring-primary mt-1 h-10 w-10 ring-2">
                     <AvatarImage
-                      src={currentAvatar}
+                      src={`/${currentAvatar}`}
                       alt={authorName}
                       className="object-cover"
                     />
@@ -147,36 +122,6 @@ const CreatePostCard = ({ currentAvatar, authorName }: CreatePostCardProps) => {
               </Field>
             )}
           />
-
-          {/* Image preview */}
-          {filesContent[0]?.content && (
-            <div className="relative mt-3 ml-13 overflow-hidden rounded-xl">
-              <Image
-                height={600}
-                width={600}
-                src={filesContent[0].content}
-                alt={plainFiles[0]?.name ?? "Selected image"}
-                className="w-full object-cover"
-              />
-              <Button
-                type="button"
-                size="icon"
-                onClick={clear} // remove selected image
-                aria-label="Remove selected image"
-                className="absolute top-2 right-2 h-7 w-7 rounded-full bg-black/60 text-white hover:bg-black/80">
-                ✕
-              </Button>
-            </div>
-          )}
-
-          {/* File size error */}
-          {errors[0] && (
-            <p
-              role="alert"
-              className="mt-2 text-center text-xs text-red-500">
-              Image is too large. Maximum size is 5 MB.
-            </p>
-          )}
         </CardContent>
 
         {/* Action bar */}
@@ -185,21 +130,6 @@ const CreatePostCard = ({ currentAvatar, authorName }: CreatePostCardProps) => {
             className="flex items-center gap-1"
             role="toolbar"
             aria-label="Post options">
-            {/* Photo */}
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              onClick={openFilePicker}
-              aria-label="Add a photo"
-              className="gap-2 rounded-lg text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100">
-              <ImageIcon
-                className="h-4 w-4 text-green-500"
-                aria-hidden="true"
-              />
-              <span className="text-sm font-medium">Photo</span>
-            </Button>
-
             {/* Emoji */}
             <Popover
               open={isEmojiOpen}
@@ -238,7 +168,7 @@ const CreatePostCard = ({ currentAvatar, authorName }: CreatePostCardProps) => {
           <Button
             type="submit"
             size="sm"
-            disabled={(!isDirty && !filesContent[0]?.content) || isSubmitting}
+            disabled={!isDirty || isSubmitting}
             aria-label="Submit post"
             className="cursor-pointer gap-2 rounded-xl bg-blue-600 px-5 font-semibold text-white shadow-sm transition hover:bg-blue-700 disabled:opacity-50">
             {isSubmitting ?
@@ -264,4 +194,4 @@ const CreatePostCard = ({ currentAvatar, authorName }: CreatePostCardProps) => {
   );
 };
 
-export default CreatePostCard;
+export default CreateCommentCard;

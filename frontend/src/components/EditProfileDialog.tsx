@@ -1,5 +1,5 @@
 import { PencilIcon } from "lucide-react";
-import BioForm from "./Forms/BioForm ";
+import BioForm from "./Forms/BioForm";
 import CoverImageForm from "./Forms/CoverImageForm";
 import NameForm from "./Forms/NameForm";
 import ProfileImageForm from "./Forms/ProfileImageForm";

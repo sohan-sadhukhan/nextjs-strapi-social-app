@@ -27,3 +27,10 @@ export const postDescriptionSchema = z.object({
     .max(500, "Description is too long")
     .optional(),
 });
+
+export const commentSchema = z.object({
+  comment: z
+    .string()
+    .min(1, "Comment cannot be empty")
+    .max(500, "Comment is too long"),
+});
