@@ -19,6 +19,8 @@ const Header = () => {
           <Link href={"/notifications"}>Notifications</Link>
           <Link href={"/profile"}>Profile</Link>
           <Link href={"/settings"}>Settings</Link>
+          <Link href={"/signup"}>Signup</Link>
+          <Link href={"/signin"}>Signin</Link>
 
           <ThemeToggleButton />
         </nav>
