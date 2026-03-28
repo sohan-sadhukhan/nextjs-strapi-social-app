@@ -153,7 +153,7 @@ const PostCard = ({
       {postImage && (
         <figure className="w-full">
           <Image
-            src={`/${authorAvatar}`}
+            src={`/${postImage}`}
             alt={`Photo shared by ${authorName}`}
             width={800}
             height={500}
@@ -214,7 +214,7 @@ const PostCard = ({
           authorAvatar={authorAvatar}
           timeAgo={timeAgo}
           description={description}
-          postImage={timeAgo}
+          postImage={authorAvatar}
           reactionCount={reactionCount}
           isFollowing={isFollowing}
           isOwnPost={isOwnPost}

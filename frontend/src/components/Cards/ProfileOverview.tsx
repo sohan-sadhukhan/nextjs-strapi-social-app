@@ -51,7 +51,7 @@ const ProfileOverview = ({
               alt={name}
               className="object-cover"
             />
-            <AvatarFallback className="bg-gradient-to-br from-blue-400 to-indigo-600 text-lg font-bold text-white">
+            <AvatarFallback className="bg-linera-to-br from-blue-400 to-indigo-600 text-lg font-bold text-white">
               {initials}
             </AvatarFallback>
           </Avatar>

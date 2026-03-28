@@ -26,8 +26,9 @@ export type PostType = {
     userName: string;
     avatarUrl: string;
     timeAgo: string;
-    comment: string[];
-  };
+    comment: string;
+    isOwn: boolean;
+  }[];
 };
 
 export type SuggestedUserType = {
@@ -38,4 +39,16 @@ export type SuggestedUserType = {
   initials: string;
   bg: string;
   text: string;
+};
+
+export type Notifications = {
+  id: number;
+  user: {
+    name: string;
+    avatar: string;
+  };
+  type: "like" | "comment";
+  timeAgo: string;
+  postThumb: string;
+  isRead: boolean;
 };

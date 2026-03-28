@@ -45,18 +45,39 @@ const page = () => {
       reactionCount: 51,
       isFollowing: false,
       isOwnPost: false,
-      comments: {
-        id: 1,
-        name: "sohan",
-        avatarUrl: "avatar.png",
-        comment: [
-          "Nice pic try The lighting in this photo really highlights the scenery",
-          "Confidence looks amazing on you.",
-          "You absolutely understood the assignment.",
-        ],
-        timeAgo: "1 day",
-        userName: "sohan1234",
-      },
+      comments: [
+        {
+          id: 1,
+          name: "sohan",
+          avatarUrl: "avatar.jpg",
+          comment:
+            "Nice pic try The lighting in this photo really highlights the scenery",
+
+          timeAgo: "1 day",
+          userName: "sohan1234",
+          isOwn: true,
+        },
+        {
+          id: 2,
+          name: "sohan",
+          avatarUrl: "avatar.jpg",
+          comment: "Confidence looks amazing on you.",
+
+          timeAgo: "1 day",
+          userName: "sohan1234",
+          isOwn: true,
+        },
+        {
+          id: 3,
+          name: "sohan",
+          avatarUrl: "avatar.jpg",
+          comment: "You absolutely understood the assignment.",
+
+          timeAgo: "1 day",
+          userName: "sohan1234",
+          isOwn: true,
+        },
+      ],
     },
     {
       authorName: "Sohan Sadhukhan",
@@ -68,17 +89,39 @@ const page = () => {
       reactionCount: 11,
       isFollowing: true,
       isOwnPost: true,
-      comments: {
-        id: 1,
-        name: "sohan",
-        avatarUrl: "avatar.png",
-        comment: [
-          "Nice pic try The lighting in this photo really highlights the scenery",
-          "That smile could fix a bad day.",
-        ],
-        timeAgo: "1 day",
-        userName: "sohan1234",
-      },
+      comments: [
+        {
+          id: 1,
+          name: "sohan",
+          avatarUrl: "avatar.jpg",
+          comment:
+            "Nice pic try The lighting in this photo really highlights the scenery",
+
+          timeAgo: "1 day",
+          userName: "sohan1234",
+          isOwn: true,
+        },
+        {
+          id: 2,
+          name: "sohan",
+          avatarUrl: "avatar.jpg",
+          comment: "Confidence looks amazing on you.",
+
+          timeAgo: "1 day",
+          userName: "sohan1234",
+          isOwn: true,
+        },
+        {
+          id: 3,
+          name: "sohan",
+          avatarUrl: "avatar.jpg",
+          comment: "You absolutely understood the assignment.",
+
+          timeAgo: "1 day",
+          userName: "sohan1234",
+          isOwn: true,
+        },
+      ],
     },
     {
       authorName: "Sohan Sadhukhan",
@@ -90,17 +133,39 @@ const page = () => {
       reactionCount: 21,
       isFollowing: true,
       isOwnPost: true,
-      comments: {
-        id: 1,
-        name: "sohan",
-        avatarUrl: "avatar.png",
-        comment: [
-          "Nice pic try The lighting in this photo really highlights the scenery",
-          "Beauty that doesn't need a filter.",
-        ],
-        timeAgo: "1 day",
-        userName: "sohan1234",
-      },
+      comments: [
+        {
+          id: 1,
+          name: "sohan",
+          avatarUrl: "avatar.jpg",
+          comment:
+            "Nice pic try The lighting in this photo really highlights the scenery",
+
+          timeAgo: "1 day",
+          userName: "sohan1234",
+          isOwn: true,
+        },
+        {
+          id: 2,
+          name: "sohan",
+          avatarUrl: "avatar.jpg",
+          comment: "Confidence looks amazing on you.",
+
+          timeAgo: "1 day",
+          userName: "sohan1234",
+          isOwn: true,
+        },
+        {
+          id: 3,
+          name: "sohan",
+          avatarUrl: "avatar.jpg",
+          comment: "You absolutely understood the assignment.",
+
+          timeAgo: "1 day",
+          userName: "sohan1234",
+          isOwn: true,
+        },
+      ],
     },
   ];
 
@@ -169,7 +234,7 @@ const page = () => {
         </aside>
 
         {/* Center feed */}
-        <div className="col-span-8 flex flex-col gap-6 pt-14 sm:pt-18 lg:col-span-6 xl:col-span-4">
+        <div className="col-span-8 flex flex-col gap-6 pt-0 sm:pt-2 lg:col-span-6 xl:col-span-4">
           <CreatePostCard
             currentAvatar={avatarUrl}
             authorName={name}
