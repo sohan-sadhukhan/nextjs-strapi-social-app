@@ -25,7 +25,7 @@ const userInfo = {
 
 const page = () => {
   return (
-    <section className="pt-18 sm:px-4">
+    <section className="pt-0 sm:px-4 sm:pt-2">
       <Card className="w-full rounded-none sm:rounded-xl">
         {/* Personal Information */}
         <CardHeader>

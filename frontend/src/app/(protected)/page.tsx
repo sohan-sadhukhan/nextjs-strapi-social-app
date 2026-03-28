@@ -234,7 +234,7 @@ const page = () => {
         </aside>
 
         {/* Center feed */}
-        <div className="col-span-8 flex flex-col gap-6 pt-14 sm:pt-18 lg:col-span-6 xl:col-span-4">
+        <div className="col-span-8 flex flex-col gap-6 pt-0 sm:pt-2 lg:col-span-6 xl:col-span-4">
           <CreatePostCard
             currentAvatar={avatarUrl}
             authorName={name}

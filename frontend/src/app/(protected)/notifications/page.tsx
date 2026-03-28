@@ -230,7 +230,7 @@ const page = () => {
       {/* Center: Notifications feed */}
       <section
         aria-label="Notifications"
-        className="col-span-8 flex flex-col pt-18 lg:col-span-6 xl:col-span-4">
+        className="col-span-8 flex flex-col pt-2 lg:col-span-6 xl:col-span-4">
         <NotificationSection notifications={notifications} />
       </section>
 

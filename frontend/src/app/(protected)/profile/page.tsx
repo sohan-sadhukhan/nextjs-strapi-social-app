@@ -73,7 +73,7 @@ const page = () => {
 
   return (
     <>
-      <section className="grid gap-4 pt-14 sm:px-4 sm:pt-18 lg:grid-cols-5">
+      <section className="grid gap-4 pt-0 sm:px-4 sm:pt-2 lg:grid-cols-5">
         {/* Left side (Main content area) */}
         <div className="mb-auto grid gap-4 lg:col-span-4">
           <UserProfileCard
