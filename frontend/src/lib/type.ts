@@ -1,34 +1,89 @@
-export type UserInfoType = {
-  name: string;
-  username: string;
-  bio: string;
-  joinedDate: string;
-  posts: number;
-  followers: number;
-  following: number;
-  avatarUrl: string;
-  coverUrl: string;
+import z from "zod";
+import { signInSchema, signUpSchema } from "./zodSchema";
+
+export type UserInfo = {
+  data: {
+    blocked: boolean;
+    confirmed: boolean;
+    createdAt: string;
+    documentId: string;
+    email: string;
+    id: number;
+    provider: string;
+    publishedAt: string;
+    updatedAt: string;
+    username: string;
+  };
 };
 
-export type PostType = {
-  authorName: string;
-  authorUsername: string;
-  authorAvatar: string;
-  timeAgo: string;
-  description: string;
-  postImage: string;
-  reactionCount: number;
-  isFollowing: boolean;
-  isOwnPost: boolean;
-  comments: {
-    id: number;
-    name: string;
-    userName: string;
-    avatarUrl: string;
-    timeAgo: string;
-    comment: string;
-    isOwn: boolean;
-  }[];
+export type AccountInfo = {
+  data: {
+    data: {
+      avatar: string;
+      bio: string;
+      coverImage: string;
+      createdAt: string;
+      documentId: string;
+      id: number;
+      name: string;
+      publishedAt: string;
+      updatedAt: string;
+      user: {
+        blocked: boolean;
+        confirmed: boolean;
+        createdAt: string;
+        documentId: string;
+        email: string;
+        id: number;
+        provider: string;
+        publishedAt: string;
+        updatedAt: string;
+        username: string;
+      };
+    }[];
+    meta: {
+      pagination: {
+        page: number;
+        pageSize: number;
+        pageCount: number;
+        total: number;
+      };
+    };
+  };
+};
+
+export type Post = {
+  data: {
+    data: {
+      createdAt: string;
+      description: string;
+      documentId: string;
+      id: number;
+      image: string;
+      publishedAt: string;
+      updatedAt: string;
+      account: {
+        avatar: string;
+        bio: string;
+        coverImage: string;
+        createdAt: string;
+        documentId: string;
+        id: number;
+        name: string;
+        publishedAt: string;
+        updatedAt: string;
+        username: string;
+      };
+    }[];
+    meta: {
+      pagination: {
+        page: number;
+        pageSize: number;
+        pageCount: number;
+        total: number;
+      };
+    };
+  };
 };
 
 export type SuggestedUserType = {
@@ -52,3 +107,6 @@ export type Notifications = {
   postThumb: string;
   isRead: boolean;
 };
+
+export type SignUpFormValues = z.infer<typeof signUpSchema>;
+export type SignInFormValues = z.infer<typeof signInSchema>;

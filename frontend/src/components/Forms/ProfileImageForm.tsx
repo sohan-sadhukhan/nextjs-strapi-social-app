@@ -54,7 +54,7 @@ const ProfileImageForm = ({ currentAvatar, name }: ProfileImageFormProp) => {
           className="h-40 w-40 shadow-lg ring-2 ring-white dark:ring-zinc-800"
           aria-label="Current profile picture">
           <AvatarImage
-            src={avatarSrc}
+            src={`/${avatarSrc}`}
             className="object-cover"
             alt={`${name}'s profile picture`}
           />

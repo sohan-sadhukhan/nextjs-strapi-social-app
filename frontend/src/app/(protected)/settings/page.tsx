@@ -10,7 +10,11 @@ import {
   CardTitle,
 } from "@/components/shadcnui/card";
 import { Separator } from "@/components/shadcnui/separator";
+import { UserInfo } from "@/lib/type";
+import axios from "axios";
 import { Metadata } from "next";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Settings | Smile App",
@@ -18,12 +22,22 @@ export const metadata: Metadata = {
     "Manage your account settings, update personal information, and change your password.",
 };
 
-const userInfo = {
-  displayUsername: "sohan",
-  email: "s@gmail.com",
-};
+const page = async () => {
+  const cookieStore = await cookies();
+  const jwt = cookieStore.get("session")?.value;
 
-const page = () => {
+  if (!jwt) {
+    redirect("/signin");
+  }
+
+  const userInformation: UserInfo = await axios.get(
+    `${process.env.STRAPI_ENDPOINT}/api/users/me`,
+    {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    },
+  );
   return (
     <section className="pt-0 sm:px-4 sm:pt-2">
       <Card className="w-full rounded-none sm:rounded-xl">
@@ -39,8 +53,8 @@ const page = () => {
 
         <CardContent>
           <PersonalInfoForm
-            username={userInfo.displayUsername ?? ""}
-            email={userInfo.email}
+            username={userInformation.data.username}
+            email={userInformation.data.email}
           />
         </CardContent>
 

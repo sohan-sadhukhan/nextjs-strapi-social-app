@@ -44,7 +44,7 @@ const UserProfileCard = ({
           <Image
             height={300}
             width={700}
-            src={coverUrl}
+            src={`/${coverUrl}`}
             alt="Cover picture"
             className="relative h-44 w-full object-cover"
           />
@@ -55,7 +55,7 @@ const UserProfileCard = ({
           <header className="-mt-14 mb-4 flex items-end justify-between">
             <Avatar className="ring-primary h-28 w-28 shadow-lg ring-4">
               <AvatarImage
-                src={avatarUrl}
+                src={`/${avatarUrl}`}
                 alt={name}
               />
               <AvatarFallback className="bg-sky-100 text-3xl font-bold text-sky-600">

@@ -1,15 +1,14 @@
 "use client";
 
+import { SignUpFormValues } from "@/lib/type";
 import { signUpSchema } from "@/lib/zodSchema";
+import signupUser from "@/server/signupUser";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
-import z from "zod";
 import { Button } from "../shadcnui/button";
 import { Field, FieldError, FieldLabel } from "../shadcnui/field";
 import { Input } from "../shadcnui/input";
-
-type SignUpFormValues = z.infer<typeof signUpSchema>;
 
 const SignupForm = () => {
   const router = useRouter();
@@ -30,9 +29,18 @@ const SignupForm = () => {
     mode: "all",
   });
 
-  const onSubmit = async (_data: SignUpFormValues) => {
+  const onSubmit = async (data: SignUpFormValues) => {
     // Replace with real sign-up API call when backend endpoint is ready.
-    router.push("/");
+    const { message, success } = await signupUser(data);
+
+    if (!success) {
+      console.log(message);
+    }
+
+    if (success) {
+      console.log(message);
+      router.push("/");
+    }
   };
 
   return (

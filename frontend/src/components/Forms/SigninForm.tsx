@@ -1,15 +1,14 @@
 "use client";
 
+import { SignInFormValues } from "@/lib/type";
 import { signInSchema } from "@/lib/zodSchema";
+import signinUser from "@/server/signinUser";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
-import z from "zod";
 import { Button } from "../shadcnui/button";
 import { Field, FieldError, FieldLabel } from "../shadcnui/field";
 import { Input } from "../shadcnui/input";
-
-type SignInFormValues = z.infer<typeof signInSchema>;
 
 const SigninForm = () => {
   const router = useRouter();
@@ -27,9 +26,16 @@ const SigninForm = () => {
     mode: "all",
   });
 
-  const onSubmit = async (_data: SignInFormValues) => {
-    // Replace with real sign-in API call when backend endpoint is ready.
-    router.push("/");
+  const onSubmit = async (data: SignInFormValues) => {
+    const { message, success } = await signinUser(data);
+
+    if (!success) {
+      console.log(message);
+    }
+    if (success) {
+      console.log(message);
+      router.push("/");
+    }
   };
 
   return (
