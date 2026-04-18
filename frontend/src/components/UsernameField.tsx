@@ -41,7 +41,7 @@ const UsernameField = ({ username }: UsernameFieldProps) => {
       <p className="text-xs text-zinc-400">
         You can&apos;t change your username here.
         <Link
-          href="/"
+          href="/settings"
           className="text-blue-600 transition-colors hover:text-blue-700 hover:underline">
           Change username in Settings
         </Link>

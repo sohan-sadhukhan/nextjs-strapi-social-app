@@ -13,6 +13,7 @@ import {
 } from "@/components/shadcnui/popover";
 import { Textarea } from "@/components/shadcnui/textarea";
 import { postDescriptionSchema } from "@/lib/zodSchema";
+import createPost from "@/server/createPost";
 import { zodResolver } from "@hookform/resolvers/zod";
 import EmojiPicker, { EmojiClickData, Theme } from "emoji-picker-react";
 import {
@@ -23,6 +24,7 @@ import {
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useFilePicker } from "use-file-picker";
@@ -34,9 +36,15 @@ import { Field, FieldError } from "../shadcnui/field";
 type CreatePostCardProps = {
   currentAvatar: string;
   authorName: string;
+  accountId: string;
 };
 
-const CreatePostCard = ({ currentAvatar, authorName }: CreatePostCardProps) => {
+const CreatePostCard = ({
+  currentAvatar,
+  authorName,
+  accountId,
+}: CreatePostCardProps) => {
+  const { push } = useRouter();
   const { theme } = useTheme();
   const [isEmojiOpen, setIsEmojiOpen] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -91,9 +99,21 @@ const CreatePostCard = ({ currentAvatar, authorName }: CreatePostCardProps) => {
     description,
   }: z.infer<typeof postDescriptionSchema>) => {
     console.log({ description, image: filesContent[0]?.content });
+    const { isSuccess, message } = await createPost(
+      description,
+      accountId,
+      plainFiles[0],
+    );
 
-    reset();
-    clear();
+    if (!isSuccess) {
+      alert(message);
+    }
+
+    if (isSuccess) {
+      reset();
+      clear();
+      push("/");
+    }
   };
 
   const nameArray = authorName.split(" ");
@@ -119,7 +139,7 @@ const CreatePostCard = ({ currentAvatar, authorName }: CreatePostCardProps) => {
                 <div className="flex items-start gap-3">
                   <Avatar className="ring-primary mt-1 h-10 w-10 ring-2">
                     <AvatarImage
-                      src={currentAvatar}
+                      src={`/${currentAvatar}`}
                       alt={authorName}
                       className="object-cover"
                     />

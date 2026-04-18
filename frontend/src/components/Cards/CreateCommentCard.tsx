@@ -39,7 +39,7 @@ const CreateCommentCard = ({
     defaultValues: {
       comment: "",
     },
-    mode: "all",
+    mode: "onSubmit",
   });
 
   const handleEmojiClick = (emojiData: EmojiClickData) => {
@@ -134,7 +134,9 @@ const CreateCommentCard = ({
             <Popover
               open={isEmojiOpen}
               onOpenChange={setIsEmojiOpen}>
-              <PopoverTrigger asChild>
+              <PopoverTrigger
+                asChild
+                type="button">
                 <Button
                   type="button"
                   variant="ghost"

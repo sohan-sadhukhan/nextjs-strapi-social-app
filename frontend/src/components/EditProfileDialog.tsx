@@ -36,7 +36,7 @@ const EditProfileDialog = ({
       <DialogTrigger asChild>
         <Button
           className={
-            "flex cursor-pointer gap-2 rounded-full bg-sky-500 px-6 py-1 font-semibold text-white shadow-md hover:bg-sky-600"
+            "flex cursor-pointer gap-2 rounded-full bg-blue-600 px-6 py-1 font-semibold text-white shadow-md hover:bg-blue-700"
           }
           aria-label="Edit profile">
           Edit

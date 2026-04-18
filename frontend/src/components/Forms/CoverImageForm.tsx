@@ -40,7 +40,7 @@ const CoverImageForm = ({ currentCover }: CoverImageFormProps) => {
         <Image
           height={300}
           width={700}
-          src={coverSrc}
+          src={`/${coverSrc}`}
           alt="Cover picture"
           className="h-36 w-full rounded-xl object-cover"
         />

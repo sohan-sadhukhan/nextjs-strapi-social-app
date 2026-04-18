@@ -7,9 +7,7 @@ import {
 } from "@/components/shadcnui/avatar";
 import { Button } from "@/components/shadcnui/button";
 import { Card } from "@/components/shadcnui/card";
-
 import { Separator } from "@/components/shadcnui/separator";
-import { PostType } from "@/lib/type";
 import {
   BookmarkIcon,
   EllipsisVerticalIcon,
@@ -40,14 +38,25 @@ const PostCard = ({
   isFollowing,
   isOwnPost,
   comments,
-}: PostType) => {
+}: {
+  authorName: string;
+  authorUsername: string;
+  authorAvatar: string;
+  timeAgo: string;
+  description: string;
+  postImage: string;
+  reactionCount: number;
+  isFollowing: boolean;
+  isOwnPost: boolean;
+  comments: any[];
+}) => {
   const [following, setFollowing] = useState(isFollowing);
   const [reacted, setReacted] = useState(false);
   const [count, setCount] = useState(reactionCount);
 
   const initials = authorName
     .split(" ")
-    .map((n) => n[0])
+    .map((n: string) => n[0])
     .join("")
     .toUpperCase();
 
@@ -150,17 +159,20 @@ const PostCard = ({
       )}
 
       {/* Post image */}
-      {postImage && (
-        <figure className="w-full">
-          <Image
-            src={`/${authorAvatar}`}
-            alt={`Photo shared by ${authorName}`}
-            width={800}
-            height={500}
-            className="w-full object-cover"
-          />
-        </figure>
-      )}
+      {postImage ?
+        <>
+          {" "}
+          <figure className="w-full">
+            <Image
+              src={`/posts/${postImage}`}
+              alt={`Photo shared by ${authorName}`}
+              width={800}
+              height={500}
+              className="w-full object-cover"
+            />
+          </figure>
+        </>
+      : ""}
 
       {/* Reaction count */}
       {count > 0 && (
@@ -190,8 +202,8 @@ const PostCard = ({
         <Button
           variant="ghost"
           onClick={() => {
-            setReacted((prev) => !prev);
-            setCount((prev) => (reacted ? prev - 1 : prev + 1));
+            setReacted((prev: boolean) => !prev);
+            setCount((prev: number) => (reacted ? prev - 1 : prev + 1));
           }}
           aria-label={reacted ? "Remove reaction" : "React to post"}
           aria-pressed={reacted}
@@ -214,7 +226,7 @@ const PostCard = ({
           authorAvatar={authorAvatar}
           timeAgo={timeAgo}
           description={description}
-          postImage={timeAgo}
+          postImage={authorAvatar}
           reactionCount={reactionCount}
           isFollowing={isFollowing}
           isOwnPost={isOwnPost}
